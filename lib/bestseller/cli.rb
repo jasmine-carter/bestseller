@@ -34,6 +34,7 @@ class BestSeller::CLI
   
   def list_books_by_categories(category)
     #it puts "#{time_on_list}: , #{book_title} by #{book_author} - Published by #{book_publisher} \n #{book_description}."
+    #maybe drop publisher from output here
     if category == "1"
       puts "1. New this week: The Guardians by John Grisham - Published by Doubleday \n Cullen Post, a lawyer and Episcopal minister, antagonizes some ruthless killers when he takes on a wrongful conviction case."
       puts "2. 58 weeks on the list: Where the Crawdads Sing by Delia Owens - Published by Putnam \n In a quiet town on the North Carolina coast in 1969, a young woman who survived alone in the marsh becomes a murder suspect."
