@@ -20,6 +20,7 @@ class BestSeller::CLI
   
   def list_categories
     #it will put all categories scraped from NYTimes best seller list
+    #eventually call Category.all method
     puts "Here are the current best seller categories."
     puts "1. Combined Print & E-Book Fiction"
     puts "2. Combined Print & E-Book Nonfiction"
