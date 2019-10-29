@@ -20,16 +20,10 @@ class BestSeller::CLI
   
   def list_categories
     #it will put all categories scraped from NYTimes best seller list
-    #eventually call Category.all method
-    puts "Here are the current best seller categories."
-    puts "1. Combined Print & E-Book Fiction"
-    puts "2. Combined Print & E-Book Nonfiction"
-    puts "3. Hardcover Fiction"
-    puts "4. Hardcover Nonfiction"
-    puts "5. Paperback Trade Fiction"
-    puts "6. Paperback Nonfiction"
-    puts "7. Advice, How-To & Miscellaneous"
-    puts "8. Children’s Middle Grade Hardcover"
+    Categories.scrape_categories #this will initiate scraping of categories
+    Categories.all.each do |category|
+      puts category.name
+    end
   end  
   
   def list_books_by_categories(category)
