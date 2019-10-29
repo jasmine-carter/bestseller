@@ -1,3 +1,4 @@
-#!/user/bin/env ruby
-#Sketching out what I want the CLI to do (Will move to a class)
-#BestSeller::CLI.new.call
+#!/usr/bin/env ruby
+require "./lib/bestseller"
+
+BestSeller::CLI.new.call

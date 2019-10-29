@@ -1,6 +1,3 @@
-require "bestseller/version"
+require_relative "./bestseller/version"
 
-module Bestseller
-  class Error < StandardError; end
-  # Your code goes here...
-end
+require_relative "./bestseller/cli"

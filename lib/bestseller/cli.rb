@@ -17,6 +17,7 @@ class BestSeller::CLI
     
     user_input = ""
     user_input = gets.chomp
+    puts user_input
   end  
   
 end 
