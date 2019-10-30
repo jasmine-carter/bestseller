@@ -21,18 +21,18 @@ class BestSeller::CLI
   def list_categories
     #it will put all categories scraped from NYTimes best seller list
     Categories.scrape_categories #this will initiate scraping of categories
-    Categories.all.each do |category|
-      puts category.name
+    Categories.all.each.with_index(1) do |category, i|
+      puts "#{i}. #{category.name}"
     end
   end  
   
   def list_books_by_categories(category)
-    #it puts "#{time_on_list}: , #{book_title} by #{book_author} - Published by #{book_publisher} \n #{book_description}."
-    #maybe drop publisher from output here
+    #it puts "#{time_on_list}: , #{book_title} by #{book_author}"
+    #maybe drop publisher from output here & description
     if category == "1"
-      puts "1. New this week: The Guardians by John Grisham - Published by Doubleday \n Cullen Post, a lawyer and Episcopal minister, antagonizes some ruthless killers when he takes on a wrongful conviction case."
-      puts "2. 58 weeks on the list: Where the Crawdads Sing by Delia Owens - Published by Putnam \n In a quiet town on the North Carolina coast in 1969, a young woman who survived alone in the marsh becomes a murder suspect."
-      puts "3. 2 weeks on the list: The 19th Christmas by James Patterson and Maxine Paetro - Published by Little,Brown \n In the 19th installment of the Women's Murder Club series, detective Lindsay Boxer and company take on a fearsome criminal known only as \"Loman.\""
+      puts "1. New this week: The Guardians by John Grisham"
+      puts "2. 58 weeks on the list: Where the Crawdads Sing by Delia Owens"
+      puts "3. 2 weeks on the list: The 19th Christmas by James Patterson and Maxine Paetro"
       elsif category == "2"
         puts "1. New this week: ME by Elton John - Published by Holt \n The multi-award-winning solo artist's first autobiography chronicles his career, relationships and private struggles."
         puts "2. New this week: Catch and Kill by Ronan Farrow - Published by Little, Brown \n The Pulitzer Prize-winning reporter details some surveillance and intimidation tactics used to pressure journalists and elude consequences by certain wealthy and connected men."

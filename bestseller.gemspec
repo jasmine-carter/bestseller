@@ -5,7 +5,7 @@ require "bestseller/version"
 
 Gem::Specification.new do |spec|
   spec.name          = "bestseller"
-  spec.version       = Bestseller::VERSION
+  spec.version       = BestSeller::VERSION
   spec.authors       = ["'Jasmine Carter'"]
   spec.email         = ["'jasmine.carter87@gmail.com'"]
 
