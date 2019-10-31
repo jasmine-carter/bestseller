@@ -1,32 +1,30 @@
+require 'pry'
+require 'nokogiri'
+require 'open-uri'
+
 class Categories
   attr_accessor :name, :books, :url
   
-  #has many books
-  #gets created with a name
-  #should be able to return all instances of Categories
   #can return all books under a given category
   #can count all books in a given category?
   
   @@all = []
-  def initialize
+  
+  def initialize(name, url)
+    @name = name
+    @url = url
     @@all << self
   end  
   
   def self.scrape_categories
-    #doc = Nokogiri::HTML(open('https://www.nytimes.com/books/best-sellers/'))
-    #for each element in whatever css class category names are contained in
-    #scrape name, scrape url and assign those values
-   
-    category_1 = self.new
-    category_1.name = "Combined Print & E-Book Fiction"
-    category_1.url = "https://www.nytimes.com/books/best-sellers/combined-print-and-e-book-nonfiction/"
-    
-    category_2 = self.new
-    category_2.name = "Hardcover Fiction"
-    category_2.url = "https://www.nytimes.com/books/best-sellers/hardcover-fiction/"
-    
-    category_1.name
-    category_2.name
+    doc = Nokogiri::HTML(open('https://www.nytimes.com/books/best-sellers/'))
+    cat_list = doc.css("section")
+    cat_list.each_with_index {|cat, i|
+    binding.pry
+      name = cat_list.css("h2").children[i].text
+      url = cat_list.css("h2").children[i].attribute("href").value
+      self.new(name, url)
+    }
   end
   
   def self.all

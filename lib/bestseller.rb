@@ -1,4 +1,4 @@
-#require 'pry'
+require 'pry'
 require 'open-uri'
 require 'nokogiri'
 require_relative "./bestseller/version"
