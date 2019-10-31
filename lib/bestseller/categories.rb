@@ -20,7 +20,7 @@ class Categories
     doc = Nokogiri::HTML(open('https://www.nytimes.com/books/best-sellers/'))
     cat_list = doc.css("section")
     cat_list.each_with_index {|cat, i|
-    binding.pry
+    #binding.pry
       name = cat_list.css("h2").children[i].text
       url = cat_list.css("h2").children[i].attribute("href").value
       self.new(name, url)
