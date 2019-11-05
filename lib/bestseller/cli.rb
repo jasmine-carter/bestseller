@@ -19,7 +19,7 @@ class BestSeller::CLI
     end
   end
 
-  def list_categories #implement find or create category logic to avoid dupe categories
+  def list_categories
     #it will put all categories scraped from NYTimes best seller list
     #Categories.scrape_categories #this will initiate scraping of categories
     Categories.return_or_create
@@ -32,9 +32,9 @@ class BestSeller::CLI
   def list_books_by_categories(input)
     input = input.to_i
     if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input)
-        category = Categories.all[input]
-        puts "You've selected, #{Categories.all[input].name}."
-        Books.create_from_category(category) #create find or create by cateogry method
+        category = Categories.all[input-1]
+        puts "You've selected, #{Categories.all[input-1].name}."
+        Books.create_from_category(category)
         Categories.display_books_by_category(category.name)
       else
         puts "Sorry, I don't recognize that category number."
