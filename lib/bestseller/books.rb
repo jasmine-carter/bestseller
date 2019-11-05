@@ -17,8 +17,9 @@ class Books
   end
 
   #category_url = "books/best-sellers/combined-print-and-e-book-fiction/"
-  def self.create_from_category(category_name, category_url) #make a scraper class - a book doesn't need to know source
-    site = "https://www.nytimes.com/#{category_url}"
+  def self.create_from_category(category) #make a scraper class - a book doesn't need to know source
+    #need to pass an argument of category, not attr of category
+    site = "https://www.nytimes.com/#{category.url}"
     doc = Nokogiri::HTML(open(site))
     #book_container = doc.css(".css-xe4cfy")
     book_container = doc.css(".css-12yzwg4 > li")
@@ -28,13 +29,26 @@ class Books
       description = book.css(".css-14lubdp").text
       time_on_list = book.css(".css-1o26r9v").text
       publisher = book.css(".css-heg334").text
-      category = category_name
-      self.new(title, author, description, time_on_list, publisher, category)
+      b_category = category
+      newbook = self.new(title, author, description, time_on_list, publisher, b_category)
+      category.books << newbook #currently is sending value of "Books" to books array
     end
   end
 
-  def self.find_or_create_from_category
-    #this method looks to see if book already exists in Books.all, if not calls create_from_caetegory
+  def self.find_or_create_from_category(category)
+      #this method looks to see if book already exists in Books.all, if not calls create_from_category
+      #if category.books is [] create_from_category
+      #else category.books
+      #argument of category finds the right category object to operate against
+      if category.books.count == 0
+        Books.create_from_category(category)
+      else
+        category.books
+      end
+  end
+
+  def self.find_by_title(title)
+    Books.all.detect {|book| book.title == title}
   end
 
   def self.all

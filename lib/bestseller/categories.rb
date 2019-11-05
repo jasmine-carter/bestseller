@@ -5,14 +5,12 @@
 class Categories #nest under bestseller class
   attr_accessor :name, :books, :url
 
-  #can return all books under a given category
-  #can count all books in a given category?
-
   @@all = []
 
   def initialize(name, url)
     @name = name
     @url = url
+    @books = []
     @@all << self
   end
 
@@ -31,13 +29,18 @@ class Categories #nest under bestseller class
     @@all
   end
 
-  def self.books_by_category(category_name)
-    #returns a categories books by category name
+  def self.display_books_by_category(category_name) #returns a number list of books by category name
     n = 1
     Books.all.select do |book|
       book.category == category_name
       puts "#{n}. #{book.title}"
       n += 1
+    end
+  end
+
+  def self.books #returns all books by category name
+    Books.all.select do |book|
+      book.category == self.name
     end
   end
 
