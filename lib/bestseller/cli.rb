@@ -17,7 +17,6 @@ class BestSeller::CLI
     end
   end
 
-
   def list_categories
     #it will put all categories scraped from NYTimes best seller list
     Categories.scrape_categories #this will initiate scraping of categories
@@ -26,20 +25,14 @@ class BestSeller::CLI
     end
   end
 
-  def list_books_by_category(input)
-    input = gets.strip.to_i-1
-    if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input)
-      category = Categories.all[input]
-      #Books.create_from_category(@name, @url)
-    end
-  end
 
   def list_books_by_categories(input)
     input = input.to_i
     if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input)
         category = Categories.all[input]
-        puts "You've selected #{Categories.all[input].name}."
+        puts "You've selected, #{Categories.all[input].name}."
         Books.create_from_category(category.name, category.url)
+        Categories.books_by_category(category.name)
       else
         puts "Sorry, I don't recognize that category number."
     end

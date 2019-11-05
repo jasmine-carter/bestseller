@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
-require "./lib/bestseller" #may need to change this later
+require_relative "../lib/bestseller" #may need to change this later
 
 BestSeller::CLI.new.call

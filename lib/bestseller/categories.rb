@@ -1,8 +1,8 @@
-require 'pry'
-require 'nokogiri'
-require 'open-uri'
+#require 'pry'
+#require 'nokogiri'
+#require 'open-uri'
 
-class Categories
+class Categories #nest under bestseller class
   attr_accessor :name, :books, :url
 
   #can return all books under a given category
@@ -16,7 +16,7 @@ class Categories
     @@all << self
   end
 
-  def self.scrape_categories
+  def self.scrape_categories #throw in scraper class
     doc = Nokogiri::HTML(open('https://www.nytimes.com/books/best-sellers/'))
     cat_list = doc.css("section").css("h2")
     #binding.pry - may be good blog post why was I getting nil?
@@ -31,11 +31,12 @@ class Categories
     @@all
   end
 
-  def books_by_category
+  def self.books_by_category(category_name)
     #returns a categories books by category name
-    #Books.all.select do |book|
-     # book.category == self
-    #end
+    Books.all.select do |book|
+      book.category == category_name
+      puts book.title
+    end
   end
 
 end

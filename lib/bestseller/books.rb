@@ -1,6 +1,6 @@
-require 'pry'
-require 'open-uri'
-require 'nokogiri'
+#require 'pry'
+#require 'open-uri'
+#require 'nokogiri'
 class Books
   attr_accessor :title, :author, :description, :time_on_list, :category, :publisher
 
@@ -12,23 +12,25 @@ class Books
       @description = description
       @time_on_list = time_on_list
       @publisher = publisher
+      @category = category
       @@all << self
   end
 
   #category_url = "books/best-sellers/combined-print-and-e-book-fiction/"
-  def self.create_from_category(category_name, category_url)
+  def self.create_from_category(category_name, category_url) #make a scraper class - a book doesn't need to know source
     site = "https://www.nytimes.com/#{category_url}"
     doc = Nokogiri::HTML(open(site))
-    book_container = doc.css(".css-xe4cfy")
-    book_container.each_with_index {|book, i|
-      title = book_container.css(".css-5pe77f").css("h3")[i].text
-      author = book_container.css(".css-1j7a9fx").css("p")[i].text
-      description = book_container.(".css-14lubdp").css("p")[i].text
-      time_on_list = book_container.css(".css-1o26r9v").css("p")[i].text
-      publisher = book_container.css(".css-heg334").css("p")[i].text
+    #book_container = doc.css(".css-xe4cfy")
+    book_container = doc.css(".css-12yzwg4 > li")
+    book_container.each do |book|
+      title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
+      author = book.css(".css-1j7a9fx").text #look at this returning ""
+      description = book.css(".css-14lubdp").text #look at this returning ""
+      time_on_list = book.css(".css-1o26r9v").text #look at this returning ""
+      publisher = book.css(".css-heg334").text #look at this returning ""
       category = category_name
       self.new(title, author, description, time_on_list, publisher, category)
-    }
+    end
   end
 
   def self.all
