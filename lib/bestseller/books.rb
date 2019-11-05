@@ -21,7 +21,6 @@ class Books
     #need to pass an argument of category, not attr of category
     site = "https://www.nytimes.com/#{category.url}"
     doc = Nokogiri::HTML(open(site))
-    #book_container = doc.css(".css-xe4cfy")
     book_container = doc.css(".css-12yzwg4 > li")
     book_container.each do |book|
       title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
@@ -31,15 +30,11 @@ class Books
       publisher = book.css(".css-heg334").text
       b_category = category
       newbook = self.new(title, author, description, time_on_list, publisher, b_category)
-      category.books << newbook #currently is sending value of "Books" to books array
+      category.books << newbook
     end
   end
 
   def self.find_or_create_from_category(category)
-      #this method looks to see if book already exists in Books.all, if not calls create_from_category
-      #if category.books is [] create_from_category
-      #else category.books
-      #argument of category finds the right category object to operate against
       if category.books.count == 0
         Books.create_from_category(category)
       else
@@ -54,7 +49,5 @@ class Books
   def self.all
     @@all
   end
-
-  #create a method to associate categories with book
 
 end

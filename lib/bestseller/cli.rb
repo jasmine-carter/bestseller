@@ -14,15 +14,15 @@ class BestSeller::CLI
       #case when input is an integer list_books_by_categories(input)
       #case when input is a string get_book_information
       input = gets.chomp
-      list_books_by_categories(input)#should only create books if they don't already exist
+      list_books_by_categories(input)
        puts "If you'd like to see more info on any of these books, enter book title. If you'd like to go back to categories, type categories, or type exit."
     end
   end
 
-
-  def list_categories
+  def list_categories #implement find or create category logic to avoid dupe categories
     #it will put all categories scraped from NYTimes best seller list
-    Categories.scrape_categories #this will initiate scraping of categories
+    #Categories.scrape_categories #this will initiate scraping of categories
+    Categories.return_or_create
     Categories.all.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end

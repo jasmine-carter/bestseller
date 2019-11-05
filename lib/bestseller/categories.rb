@@ -29,6 +29,12 @@ class Categories #nest under bestseller class
     @@all
   end
 
+  def self.return_or_create
+    if Categories.all.count == 0
+      self.scrape_categories
+    end
+  end
+
   def self.display_books_by_category(category_name) #returns a number list of books by category name
     n = 1
     Books.all.select do |book|
