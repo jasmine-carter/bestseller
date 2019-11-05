@@ -11,9 +11,11 @@ class BestSeller::CLI
     puts "If you'd like to see books within a category, enter the category number:"
     input = ""
     while input != "exit"
+      #case when input is an integer list_books_by_categories(input)
+      #case when input is a string get_book_information
       input = gets.chomp
-      list_books_by_categories(input)
-       puts "If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type categories, or type exit."
+      list_books_by_categories(input)#should only create books if they don't already exist
+       puts "If you'd like to see more info on any of these books, enter book title. If you'd like to go back to categories, type categories, or type exit."
     end
   end
 
@@ -31,11 +33,25 @@ class BestSeller::CLI
     if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input)
         category = Categories.all[input]
         puts "You've selected, #{Categories.all[input].name}."
-        Books.create_from_category(category.name, category.url)
+        Books.create_from_category(category.name, category.url) #create find or create by cateogry method
         Categories.books_by_category(category.name)
       else
         puts "Sorry, I don't recognize that category number."
     end
+  end
+
+  def selected_book(book_name) #this method finds the book the use selected from Books.all
+    Books.all.select do |b|
+      b.name == book_name
+    end
+  end
+
+  def show_selected_book_info #this method shows user all of a given book's information
+    book = selected_book(book_name)
+    puts "Time on the Best Seller List:#{book.time_on_list}"
+    puts "Title: #{book.name}, #{book.author}"
+    puts "Published by #{book.publisher}"
+    puts "#{book.description}"
   end
 
   def goodbye

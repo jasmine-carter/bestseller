@@ -33,9 +33,11 @@ class Categories #nest under bestseller class
 
   def self.books_by_category(category_name)
     #returns a categories books by category name
+    n = 1
     Books.all.select do |book|
       book.category == category_name
-      puts book.title
+      puts "#{n}. #{book.title}"
+      n += 1
     end
   end
 

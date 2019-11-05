@@ -24,13 +24,17 @@ class Books
     book_container = doc.css(".css-12yzwg4 > li")
     book_container.each do |book|
       title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
-      author = book.css(".css-1j7a9fx").text #look at this returning ""
-      description = book.css(".css-14lubdp").text #look at this returning ""
-      time_on_list = book.css(".css-1o26r9v").text #look at this returning ""
-      publisher = book.css(".css-heg334").text #look at this returning ""
+      author = book.css(".css-1j7a9fx").text
+      description = book.css(".css-14lubdp").text
+      time_on_list = book.css(".css-1o26r9v").text
+      publisher = book.css(".css-heg334").text
       category = category_name
       self.new(title, author, description, time_on_list, publisher, category)
     end
+  end
+
+  def self.find_or_create_from_category
+    #this method looks to see if book already exists in Books.all, if not calls create_from_caetegory
   end
 
   def self.all
