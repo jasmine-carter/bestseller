@@ -56,16 +56,10 @@ class BestSeller::CLI
     end
   end
 
-  def selected_book(book_name) #this method finds the book the use selected from Books.all
-    Books.all.select do |b|
-      b.title == book_name
-    end
-  end
-
-  def show_selected_book_info #this method shows user all of a given book's information
-    book = selected_book(book_name)
+  def self.show_selected_book_info(book_name)#method takes the string selection input of a user and finds the matching book object
+    book = Books.find_by_title(book_name)
     puts "Time on the Best Seller List:#{book.time_on_list}"
-    puts "Title: #{book.name}, #{book.author}"
+    puts "Title: #{book.title}, #{book.author}"
     puts "Published by #{book.publisher}"
     puts "#{book.description}"
   end
