@@ -25,7 +25,10 @@ class BestSeller::CLI
        when input.downcase.include?("category")
          list_books_by_categories(input[-1].to_i)
        when input.downcase.include?("book")
-         #show selected book get_book_information
+         #example input "book 2"
+         #takes the input, strips to number of the book
+         #need to get from string input of book 2, to be a book title for show_selected_book_info method
+         self.show_selected_book_info(input)
        when input == "categories"
          list_categories
        else
