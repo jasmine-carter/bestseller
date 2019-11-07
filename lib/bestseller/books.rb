@@ -16,7 +16,7 @@ class Books
       @@all << self
   end
 
-  #category_url = "books/best-sellers/combined-print-and-e-book-fiction/"
+  #category_url = "https://www.nytimes.com/books/best-sellers/combined-print-and-e-book-fiction/"
   def self.create_from_category(category) #make a scraper class - a book doesn't need to know source
     #need to pass an argument of category, not attr of category
     site = "https://www.nytimes.com/#{category.url}"
@@ -24,7 +24,7 @@ class Books
     book_container = doc.css(".css-12yzwg4 > li")
     book_container.each do |book|
       title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
-      author = book.css(".css-1j7a9fx").text #isn't getting scraped properly
+      author = book.css(".css-hjukut").text #isn't getting scraped properly
       description = book.css(".css-14lubdp").text
       time_on_list = book.css(".css-1o26r9v").text
       publisher = book.css(".css-heg334").text
