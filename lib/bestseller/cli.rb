@@ -26,8 +26,6 @@ class BestSeller::CLI
                 input = gets.chomp
                 if input.to_i != 0
                  state = "book_view"
-                 puts "you're in the book view"
-                 #write code to select book
                   if input.to_i >=1 && input.to_i <= category.books.count && (1..category.books.count).include?(input.to_i)
                     book = category.books[input.to_i-1]
                     show_selected_book_info(book)
@@ -82,10 +80,12 @@ class BestSeller::CLI
   end
 
   def show_selected_book_info(book)#method takes the string selection input of a user and finds the matching book object
-    puts "Time on the Best Seller List:#{book.time_on_list}"
+    puts "You've selected #{book.title}. Here's more information on it!"
+    puts "Time on the Best Seller List: #{book.time_on_list}"
     puts "Title: #{book.title}, #{book.author}"
-    puts "Published by #{book.publisher}"
-    puts "#{book.description}"
+    puts "Published by: #{book.publisher}"
+    puts "Brief Description: #{book.description}"
+    puts "\n\n\n"
   end
 
   def goodbye
