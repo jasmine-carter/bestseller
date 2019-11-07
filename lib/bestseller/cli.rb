@@ -20,12 +20,21 @@ class BestSeller::CLI
             	list_books_by_categories(input)
             	back = input
             	state = "books_by_category_view"
+              category = Categories.all[input.to_i-1]
           when "books_by_category_view"
           	puts "If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
                 input = gets.chomp
                 if input.to_i != 0
                  state = "book_view"
                  puts "you're in the book view"
+                 #write code to select book
+                  if input.to_i >=1 && input.to_i <= category.books.count && (1..category.books.count).include?(input.to_i)
+                    book = category.books[input.to_i-1]
+                    show_selected_book_info(book)
+                  else
+                    puts "That doesn't look like a valid book number. Please enter a valid book number."
+                  end
+
                elsif input == "categories"
                  state = "category_view"
                elsif input == "back"
@@ -72,8 +81,7 @@ class BestSeller::CLI
     end
   end
 
-  def self.show_selected_book_info(book_name)#method takes the string selection input of a user and finds the matching book object
-    book = Books.find_by_title(book_name)
+  def show_selected_book_info(book)#method takes the string selection input of a user and finds the matching book object
     puts "Time on the Best Seller List:#{book.time_on_list}"
     puts "Title: #{book.title}, #{book.author}"
     puts "Published by #{book.publisher}"
