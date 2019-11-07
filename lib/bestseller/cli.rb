@@ -9,8 +9,6 @@ class BestSeller::CLI
   def menu
       input = ""
       state = "category_view"
-      #list_categories
-      #input = gets.chomp
     while input.downcase != "exit"
     	case state
       when "category_view"
@@ -50,6 +48,7 @@ class BestSeller::CLI
           		state = "category_view"
           	elsif input.downcase == "back"
           		state = "books_by_category_view"
+              list_books_by_categories(back)
           	else
           	 puts "Command not recognized. To view the category list, type \"categories\".\n Or type \"exit\"."
            end
