@@ -46,8 +46,6 @@ class Books
     Books.all.detect {|book| book.title == title}
   end
 
-
-
   def self.all
     @@all
   end
