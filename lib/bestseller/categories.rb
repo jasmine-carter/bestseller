@@ -35,12 +35,13 @@ class Categories #nest under bestseller class
     end
   end
 
-  def self.display_books_by_category(category_name) #returns a number list of books by category name
+  def self.display_books_by_category(category) #returns a number list of books by category name
     n = 1
     Books.all.select do |book|
-      book.category == category_name
+      if book.category.name == category.name
       puts "#{n}. #{book.title}"
       n += 1
+      end
     end
   end
 

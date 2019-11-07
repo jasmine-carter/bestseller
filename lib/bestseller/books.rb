@@ -24,7 +24,7 @@ class Books
     book_container = doc.css(".css-12yzwg4 > li")
     book_container.each do |book|
       title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
-      author = book.css(".css-1j7a9fx").text
+      author = book.css(".css-1j7a9fx").text #isn't getting scraped properly
       description = book.css(".css-14lubdp").text
       time_on_list = book.css(".css-1o26r9v").text
       publisher = book.css(".css-heg334").text

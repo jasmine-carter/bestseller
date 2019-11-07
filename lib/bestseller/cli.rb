@@ -65,7 +65,7 @@ class BestSeller::CLI
         category = Categories.all[input-1]
         puts "You've selected, #{Categories.all[input-1].name}."
         Books.find_or_create_from_category(category) #used to be create_from_category
-        Categories.display_books_by_category(category.name)
+        Categories.display_books_by_category(category)
       else
         puts "Sorry, I don't recognize that category number."
     end
