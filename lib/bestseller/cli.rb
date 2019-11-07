@@ -31,14 +31,15 @@ class BestSeller::CLI
                elsif input == "back"
                  list_books_by_categories(back)
                  state = "books_by_category_view"
-                 puts "If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type categories, or type exit."
+               #elsif input == "exit" build in function to exit in this state
                else
                   puts "Command not recognized. \n If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
                  input = gets.chomp
                end
           when "book_view"
-          	puts "If you'd like to go back to the list of books by category, type \"back\". \n To view the category list, type \"categories\".\n Or type \"exit\"."
-          	if input.downcase == "categories"
+            puts "If you'd like to go back to the list of books by category, type \"back\". \n To view the category list, type \"categories\".\n Or type \"exit\"."
+            input = gets.chomp
+            if input.downcase == "categories"
           		state = "category_view"
           	elsif input.downcase == "back"
           		state = "books_by_category_view"
