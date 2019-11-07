@@ -12,7 +12,8 @@ class BestSeller::CLI
     while input.downcase != "exit"
     	case state
       when "category_view"
-      		list_categories
+        puts "\n"
+          list_categories
       		puts "If you'd like to see books within a category, enter the category number:"
       		input = gets.chomp
             	list_books_by_categories(input)
@@ -20,7 +21,7 @@ class BestSeller::CLI
             	state = "books_by_category_view"
               category = Categories.all[input.to_i-1]
           when "books_by_category_view"
-          	puts "If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
+          	puts "If you'd like to see more info on any of these books, enter a book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
                 input = gets.chomp
                 if input.to_i != 0
                  state = "book_view"
@@ -38,7 +39,7 @@ class BestSeller::CLI
                  state = "books_by_category_view"
                #elsif input == "exit" build in function to exit in this state
                else
-                  puts "Command not recognized. \n If you'd like to see more info on any of these books, enter book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
+                  puts "Command not recognized. \n If you'd like to see more info on any of these books, enter a book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
                  input = gets.chomp
                end
           when "book_view"
@@ -70,8 +71,10 @@ class BestSeller::CLI
     input = input.to_i
     if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input)
         category = Categories.all[input-1]
-        puts "You've selected, #{Categories.all[input-1].name}."
+        puts "\n"
+        puts "You've selected," + "\s#{Categories.all[input-1].name}.".bold
         Books.find_or_create_from_category(category) #used to be create_from_category
+        puts "\n"
         Categories.display_books_by_category(category)
       else
         puts "Sorry, I don't recognize that category number."
@@ -79,12 +82,14 @@ class BestSeller::CLI
   end
 
   def show_selected_book_info(book)#method takes the string selection input of a user and finds the matching book object
-    puts "You've selected #{book.title}. Here's more information on it!"
-    puts "Time on the Best Seller List: #{book.time_on_list}"
-    puts "Title: #{book.title}, #{book.author}"
-    puts "Published by: #{book.publisher}"
-    puts "Brief Description: #{book.description}"
-    puts "\n\n\n"
+    puts "\n"
+    puts "You've selected" + "\s#{book.title}".bold + "\sHere's more information on it!"
+    puts "\n"
+    puts "Time on the Best Seller List:".underline +  "\s#{book.time_on_list}"
+    puts "Title:".underline + "\s#{book.title}, #{book.author}"
+    puts "Published by:".underline + "\s#{book.publisher}"
+    puts "Brief Description:".underline + "\s#{book.description}"
+    puts "\n\n"
   end
 
   def goodbye

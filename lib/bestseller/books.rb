@@ -42,10 +42,6 @@ class Books
       end
   end
 
-  def self.find_by_title(title)
-    Books.all.detect {|book| book.title == title}
-  end
-
   def self.all
     @@all
   end
