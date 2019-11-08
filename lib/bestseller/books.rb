@@ -2,6 +2,8 @@
 #require 'open-uri'
 #require 'nokogiri'
 class Books
+  include BestSeller
+
   attr_accessor :title, :author, :description, :time_on_list, :category, :publisher
 
   @@all = []
@@ -16,27 +18,9 @@ class Books
       @@all << self
   end
 
-  #category_url = "https://www.nytimes.com/books/best-sellers/combined-print-and-e-book-fiction/"
-  def self.create_from_category(category) #make a scraper class - a book doesn't need to know source
-    #need to pass an argument of category, not attr of category
-    site = "https://www.nytimes.com/#{category.url}"
-    doc = Nokogiri::HTML(open(site))
-    book_container = doc.css(".css-12yzwg4 > li")
-    book_container.each do |book|
-      title = book.css("h3").text.downcase.split(" ").map {|s| s.capitalize}.join(" ")
-      author = book.css(".css-hjukut").text #isn't getting scraped properly
-      description = book.css(".css-14lubdp").text
-      time_on_list = book.css(".css-1o26r9v").text
-      publisher = book.css(".css-heg334").text
-      b_category = category
-      newbook = self.new(title, author, description, time_on_list, publisher, b_category)
-      category.books << newbook
-    end
-  end
-
   def self.find_or_create_from_category(category)
       if category.books.count == 0
-        Books.create_from_category(category)
+        Scraper.create_books_from_category(category)
       else
         category.books
       end
