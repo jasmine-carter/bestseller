@@ -37,7 +37,8 @@ class BestSeller::CLI
                     book = category.books[input.to_i-1]
                     show_selected_book_info(book)
                   else
-                    puts "That doesn't look like a valid book number. Please enter a valid book number."
+                    puts "That doesn't look like a valid book number."
+                    state = "books_by_category_view"
                   end
                 elsif input == "categories"
                   state = "category_view"
@@ -46,11 +47,12 @@ class BestSeller::CLI
                   state = "books_by_category_view"
                 else
                   puts "\n"
-                  puts "Command not recognized. \nIf you'd like to see more info on any of these books, enter a book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
-                 input = gets.chomp
+                  puts "That doesn't appear to be a valid command."
+                  #puts "Command not recognized. \nIf you'd like to see more info on any of these books, enter a book number. If you'd like to go back to categories, type \"categories\", or type \"exit\"."
+                  state = "books_by_category_view"
                end
           when "book_view"
-            puts "If you'd like to go back to the list of books by category, type \"back\". \n To view the category list, type \"categories\".\n Or type \"exit\"."
+            puts "If you'd like to go back to the list of books by category, type \"back\". \nTo view the category list, type \"categories\".\nOr type \"exit\"."
             input = gets.chomp
             if input.downcase == "categories"
           		state = "category_view"
@@ -60,7 +62,7 @@ class BestSeller::CLI
             elsif input.downcase == "exit"
               goodbye
           	else
-          	 puts "Command not recognized. To view the category list, type \"categories\".\n Or type \"exit\"."
+          	 puts "That doesn't look like a valid book number. Please enter a valid book number."
            end
         end
       end
