@@ -12,8 +12,7 @@ class Scraper
     }
   end
 
-  def self.create_books_from_category(category) #make a scraper class - a book doesn't need to know source
-    #need to pass an argument of category, not attr of category
+  def self.create_books_from_category(category)
     site = "https://www.nytimes.com/#{category.url}"
     doc = Nokogiri::HTML(open(site))
     book_container = doc.css(".css-12yzwg4 > li")

@@ -100,6 +100,12 @@ class BestSeller::CLI
     puts "\n\n"
   end
 
+  #build out methods for each menu state
+
+  #def category_menu
+  #end
+
+
   def goodbye
     puts "Happy Reading!"
   end

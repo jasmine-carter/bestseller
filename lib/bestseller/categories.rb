@@ -1,8 +1,4 @@
-#require 'pry'
-#require 'nokogiri'
-#require 'open-uri'
-
-class Categories #nest under bestseller class
+class Categories
   include BestSeller
 
   attr_accessor :name, :books, :url
