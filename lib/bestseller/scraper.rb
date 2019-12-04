@@ -12,6 +12,7 @@ class Scraper
     }
   end
 
+#should this be moved to Categories Class?
   def self.create_books_from_category(category)
     site = "https://www.nytimes.com/#{category.url}"
     doc = Nokogiri::HTML(open(site))
