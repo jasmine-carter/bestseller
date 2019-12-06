@@ -81,7 +81,7 @@ class BestSeller::CLI
         category = Categories.all[input-1]
         puts "\n"
         puts "You've selected," + "\s#{Categories.all[input-1].name}.".bold
-        puts "Here are the books in that category."
+        puts "Here are the books currently in that category."
         Books.find_or_create_from_category(category)
         puts "\n"
         Categories.display_books_by_category(category)
@@ -95,7 +95,7 @@ class BestSeller::CLI
     puts "Time on the Best Seller List:".underline +  "\s#{book.time_on_list}"
     puts "Title:".underline + "\s#{book.title}"
     puts "Author:".underline + "\s#{book.author}"
-    puts "Published by:".underline + "\s#{book.publisher}"
+    puts "Publisher:".underline + "\s#{book.publisher}"
     puts "Brief Description:".underline + "\s#{book.description}"
     puts "\n\n"
   end

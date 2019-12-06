@@ -1,6 +1,6 @@
 # Bestseller
 
-This Ruby Gem provides a CLI to view the categories of books on the New York Time's bestseller list. Users can select a category to see information about the books within it.
+This Ruby Gem provides a CLI to view the categories of books on the New York Time's bestseller list. Users can select a category to see information about the books within it. Bestseller CLI is designed to be user-friendly, with clear prompts and direction given to the user.
 
 ## Installation
 
