@@ -20,7 +20,7 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+Start the CLI by navigating to bin/bestseller. The CLI will direct you from there!
 
 ## Development
 

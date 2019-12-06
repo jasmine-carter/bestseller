@@ -90,7 +90,7 @@ class BestSeller::CLI
 
   def show_selected_book_info(book)#method takes the string selection input of a user and finds the matching book object
     puts "\n"
-    puts "You've selected" + "\s#{book.title}".bold + "\sHere's more information on it!"
+    puts "You've selected" + "\s#{book.title}".bold + ".\sHere's more information on it!"
     puts "\n"
     puts "Time on the Best Seller List:".underline +  "\s#{book.time_on_list}"
     puts "Title:".underline + "\s#{book.title}"
