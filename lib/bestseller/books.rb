@@ -1,6 +1,5 @@
-class Books
+class BestSeller::Book
   include BestSeller
-
   attr_accessor :title, :author, :description, :time_on_list, :category, :publisher
 
   @@all = []
@@ -17,7 +16,7 @@ class Books
 
   def self.find_or_create_from_category(category)
       if category.books.count == 0
-        Scraper.create_books_from_category(category)
+        BestSeller::Scraper.create_books_from_category(category)
       else
         category.books
       end

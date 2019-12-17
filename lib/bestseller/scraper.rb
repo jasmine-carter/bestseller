@@ -1,4 +1,4 @@
-class Scraper
+class BestSeller::Scraper
   include BestSeller
 
   def self.scrape_categories #throw in scraper class
@@ -8,11 +8,10 @@ class Scraper
     cat_list.each_with_index {|cat, i|
       name = cat_list[i].text
       url = cat_list.children[i].attribute("href").value
-      Categories.new(name, url)
+      BestSeller::Category.new(name, url)
     }
   end
 
-#should this be moved to Categories Class?
   def self.create_books_from_category(category)
     site = "https://www.nytimes.com/#{category.url}"
     doc = Nokogiri::HTML(open(site))
@@ -24,7 +23,7 @@ class Scraper
       time_on_list = book.css(".css-1o26r9v").text
       publisher = book.css(".css-heg334").text
       b_category = category
-      newbook = Books.new(title, author, description, time_on_list, publisher, b_category)
+      newbook = BestSeller::Book.new(title, author, description, time_on_list, publisher, b_category)
       category.books << newbook
     end
   end

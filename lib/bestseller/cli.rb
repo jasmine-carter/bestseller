@@ -5,6 +5,7 @@ class BestSeller::CLI
     menu
   end
 
+#this is gross. break this out into seperate methods nested under each case?
   def menu
       input = ""
       state = "category_view"
@@ -17,11 +18,11 @@ class BestSeller::CLI
       	input = gets.chomp
           if input.downcase == "exit"
             goodbye
-          elsif input.to_i != 0 && input.to_i >= 1 && input.to_i <= Categories.all.length && (1..Categories.all.length).include?(input.to_i)
+          elsif input.to_i != 0 && input.to_i >= 1 && input.to_i <= BestSeller::Category.all.length && (1..BestSeller::Category.all.length).include?(input.to_i)
             list_books_by_categories(input)
             back = input
             state = "books_by_category_view"
-            category = Categories.all[input.to_i-1]
+            category = BestSeller::Category.all[input.to_i-1]
           else puts "That doesn't look like a valid category number. Please enter a category number, or type \"exit\"."
             state = "category_view"
           end
@@ -68,23 +69,24 @@ class BestSeller::CLI
 
   def list_categories
     #it will put all categories scraped from NYTimes best seller list
-    Categories.return_or_create
-    Categories.all.each.with_index(1) do |category, i|
+    BestSeller::Category.return_or_create
+    BestSeller::Category.all.each.with_index(1) do |category, i|
       puts "#{i}. #{category.name}"
     end
   end
 
 
+
   def list_books_by_categories(input)
     input = input.to_i
-    if input >= 1 && input <= Categories.all.length && (1..Categories.all.length).include?(input) #possibly get rid of, is handled in line 21
-        category = Categories.all[input-1]
+    if input >= 1 && input <= BestSeller::Category.all.length && (1..BestSeller::Category.all.length).include?(input) #possibly get rid of, is handled in line 21
+        category = BestSeller::Category.all[input-1]
         puts "\n"
-        puts "You've selected," + "\s#{Categories.all[input-1].name}.".bold
+        puts "You've selected," + "\s#{BestSeller::Category.all[input-1].name}.".bold
         puts "Here are the books currently in that category."
-        Books.find_or_create_from_category(category)
+        BestSeller::Book.find_or_create_from_category(category)
         puts "\n"
-        Categories.display_books_by_category(category)
+        BestSeller::Category.display_books_by_category(category)
     end
   end
 
